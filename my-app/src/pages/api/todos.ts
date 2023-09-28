@@ -8,6 +8,17 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse){
         res.status(200).json({ans})
     }
     else if(req.method === 'POST'){
-
+        const newTodo = {
+            id: Math.floor(Math.random()*1000000),
+            title: req.body.title,
+            description: req.body.description,
+        };
+        try {
+            const newSave = new Todo(newTodo);
+            await newSave.save();
+            res.status(200).json(newTodo);
+        } catch {
+            res.status(500);
+        }
     }
 }
