@@ -4,13 +4,14 @@ import Todo from "../../../models/testModel";
 
 export default async function handler( req: NextApiRequest, res: NextApiResponse){
     await connectMongo();
-    const { id } = req.query;
+    const { todos } = req.query;
+    const id = todos[1];
     if(req.method === 'GET'){
         const todo = await Todo.findById(id);
         if (!todo) {
-            res.status(404);
+            res.status(404).end();
         } else {
-            res.json({ todo });
+            res.end({ todo });
         }
     }
     else if(req.method === 'PUT'){
@@ -34,7 +35,7 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
         } catch (error) {
             res
                 .status(500)
-                .send({ error: "Error deleting todo"});
+                .send({ error: "Error occured"});
         }
     }
 }
