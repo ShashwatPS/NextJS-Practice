@@ -4,7 +4,7 @@ import styles from "../styles/Todos.module.css";
 function Todos(){
     const [Todo, SetTodo] = useState([]);
     const fetchTodos = ()=>{
-        fetch("http://localhost:3000/todos", {
+        fetch("http://localhost:3000/api/todos", {
             method: "GET",
         }).then((res) => {
             res.json().then((data) => {
@@ -14,13 +14,7 @@ function Todos(){
     }
 
     useEffect(() => {
-        fetch("http://localhost:3000/todos", {
-            method: "GET",
-        }).then((res) => {
-            res.json().then((data) => {
-                SetTodo(data.Todos);
-            });
-        });
+        fetchTodos();
     }, []);
 
 
@@ -47,7 +41,7 @@ function Todos(){
                         }}
                                 size="small"
                                 onClick={() => {
-                                    fetch(`http://localhost:3000/todos/${data.id}`, {
+                                    fetch(`http://localhost:3000/api/todos/${data.id}`, {
                                         method: "DELETE",
                                         headers: {
                                             "Content-type": "application/json",
