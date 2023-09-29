@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import {TextField} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
-import styles  from "../styles/AddTodo.module.css"
 
 function AddTodos() {
     const [Todo, SetTodo] = useState([]);
@@ -48,7 +47,7 @@ function AddTodos() {
                         style={{
                             marginRight: "50px",
                         }}
-                        InputLabelProps={{className: styles.text}}
+                        InputLabelProps={{className: "text"}}
                         onChange={(e) => {
                             setTitle(e.target.value);
                         }}

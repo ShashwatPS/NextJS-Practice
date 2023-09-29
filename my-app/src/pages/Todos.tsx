@@ -1,8 +1,15 @@
 import {Button, Card, CardActions, CardContent} from "@mui/material";
 import {useEffect, useState} from "react";
 import styles from "../styles/Todos.module.css";
+
+type test = {
+    _id: string,
+     id:number,
+    title: string,
+    description: string
+}
 function Todos(){
-    const [Todo, SetTodo] = useState([]);
+    const [Todo, SetTodo] = useState<test[]>([]);
     const fetchTodos = ()=>{
         fetch("http://localhost:3000/api/todos", {
             method: "GET",
@@ -14,9 +21,14 @@ function Todos(){
     }
 
     useEffect(() => {
-        fetchTodos();
+        fetch("http://localhost:3000/api/todos", {
+            method: "GET",
+        }).then((res) => {
+            res.json().then((data) => {
+                SetTodo(data.Todos);
+            });
+        });
     }, []);
-
 
     return(
         <div>
